@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/wp-json/wp/v2/posts";
+const API_URL = "http://127.0.0.1:8000/index.php/wp-json/wp/v2/posts";
 
 const container = document.getElementById("posts-container");
 

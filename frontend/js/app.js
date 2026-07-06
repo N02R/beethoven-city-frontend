@@ -23,6 +23,6 @@ fetch(API_URL)
     
   })
   .catch(err => {
-    console.log("Error:", err);
+    console.error(err);
     container.innerHTML = "<p>Failed to load data</p>";
   });

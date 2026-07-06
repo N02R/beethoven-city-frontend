@@ -2,12 +2,17 @@ const API_URL = "http://127.0.0.1:8000/index.php/wp-json/wp/v2/posts";
 
 const container = document.getElementById("posts-container");
 
+container.innerHTML = "<p>⏳ جاري الاتصال بـ WordPress...</p>";
+
 fetch(API_URL)
-  .then(res => res.json())
+  .then(response => {
+    container.innerHTML += "<p>✅ تم استلام Response من السيرفر.</p>";
+    return response.json();
+  })
   .then(posts => {
+    container.innerHTML = `<p>✅ تم تحميل ${posts.length} منشور.</p>`;
     
     posts.forEach(post => {
-      
       const card = document.createElement("div");
       card.className = "card mb-3";
       
@@ -20,9 +25,11 @@ fetch(API_URL)
       
       container.appendChild(card);
     });
-    
   })
   .catch(err => {
-    console.error(err);
-    container.innerHTML = "<p>Failed to load data</p>";
+    container.innerHTML = `
+      <h3>❌ حدث خطأ</h3>
+      <pre>${err.name}</pre>
+      <pre>${err.message}</pre>
+    `;
   });
